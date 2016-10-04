@@ -28,6 +28,9 @@ public class MyWidget : Box {
 }
 
 void main(string[] args) {
+    var testQuery = "select * from entries where title like '切'";
+    DictEntry.query(testQuery);
+
     Gtk.init (ref args);
     var win = new Window();
     win.destroy.connect (Gtk.main_quit);
