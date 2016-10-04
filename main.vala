@@ -1,6 +1,6 @@
 using Gtk;
 
-[GtkTemplate (ui = "/org/application_window.ui")]
+[GtkTemplate (ui = "/koidict/ui/application_window.ui")]
 public class MyWidget : Box {
     public string text {
         get { return entry.text; }
