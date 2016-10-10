@@ -2,5 +2,7 @@
 <gresources>
   <gresource prefix="/koidict">
     <file compressed="true" preprocess="xml-stripblanks">ui/application_window.ui</file>
+    <file compressed="true" preprocess="xml-stripblanks">application_window.ui</file>
+    <file compressed="true" preprocess="xml-stripblanks">app_window.ui</file>
   </gresource>
 </gresources>
