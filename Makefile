@@ -1,8 +1,14 @@
+all: koidict
+
 clean:
 	rm -fv *~ resources.c koidict
+
+ui: resources.c
 
 resources.c: koidict.gresource.xml
 	glib-compile-resources $< --target=$@ --generate-source
 
-koidict: main.vala model/dict_entry.vala resources.c
-	valac -o $@ $^ --pkg gtk+-3.0 --pkg sqlite3 --target-glib=2.38 --gresources=koidict.gresource.xml
+koidict: ui code
+
+code: $(wildcard *.vala) model/dict_entry.vala resources.c
+	valac -o $@ $^ --pkg gtk+-3.0 --target-glib=2.38 --gresources=koidict.gresource.xml
