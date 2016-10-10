@@ -29,20 +29,45 @@ public class MyWidget : Box {
 
 
 public class MyApplication : Gtk.Application {
+
+	const GLib.ActionEntry[] actions = {
+		{"quit", quit},
+		{"about", about},
+	};
+
 	public MyApplication () {
 		Object(application_id: "org.koidict.app", flags: ApplicationFlags.FLAGS_NONE);
 	}
 
 	protected override void activate () {
-        Gtk.ApplicationWindow window = new AppWindow (this);
+		Gtk.ApplicationWindow window = new AppWindow (this);
 		window.show ();
+		// var testQuery = "select * from entries where title like '切'";
+		// DictEntry.query(testQuery);
+	}
+
+	protected override void startup () {
+		base.startup ();
+		add_action_entries(actions, this);
+		set_accels_for_action("app.quit", {"<Primary>Q"});
+	}
+
+	void about() {
+        unowned List<Gtk.Window> windows = get_windows();
+        Gtk.show_about_dialog (
+            windows != null ? windows.data : null,
+            "program-name", "Showdown",
+            "version", "0.4",
+            "comments", "Simple Markdown viewer",
+            "copyright", "Copyright 2015 Craig Barnes",
+            "logo-icon-name", "showdown",
+            "license-type", Gtk.License.GPL_3_0,
+            "website", "https://github.com/craigbarnes/showdown"
+        );
     }
 }
 
 int main(string[] args) {
-    var testQuery = "select * from entries where title like '切'";
-    DictEntry.query(testQuery);
-
-    MyApplication app = new MyApplication ();
+	MyApplication app = new MyApplication ();
 	return app.run (args);
 }
