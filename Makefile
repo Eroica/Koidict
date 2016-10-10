@@ -3,7 +3,7 @@ all: koidict
 clean:
 	rm -fv *~ resources.c koidict
 
-ui: resources.c
+ui: resources.c $(wildcard *.ui)
 
 resources.c: koidict.gresource.xml
 	glib-compile-resources $< --target=$@ --generate-source
