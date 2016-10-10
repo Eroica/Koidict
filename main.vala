@@ -39,7 +39,7 @@ public class MyApplication : Gtk.Application {
     }
 }
 
-void main(string[] args) {
+int main(string[] args) {
     var testQuery = "select * from entries where title like '切'";
     DictEntry.query(testQuery);
 
