@@ -1,6 +1,6 @@
 using Gtk;
 
-[GtkTemplate (ui = "/koidict/ui/application_window.ui")]
+[GtkTemplate (ui = "/org/koidict/app/ui/application_window.ui")]
 public class MyWidget : Box {
 	public string text {
 		get { return entry.text; }
@@ -32,39 +32,35 @@ public class MyApplication : Gtk.Application {
 
 	const GLib.ActionEntry[] actions = {
 		{"quit", quit},
-		{"about", about},
+		{"about", null},
 	};
+
+	const string[] test = {"<Primary>Q"};
 
 	public MyApplication () {
 		Object(application_id: "org.koidict.app", flags: ApplicationFlags.FLAGS_NONE);
+
 	}
 
 	protected override void activate () {
+		var css = new CssProvider ();
+		css.load_from_resource (@"$resource_base_path/style.css");
+
+		Gtk.StyleContext.add_provider_for_screen (
+			Gdk.Screen.get_default (), css, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
 		Gtk.ApplicationWindow window = new AppWindow (this);
 		window.show ();
 		// var testQuery = "select * from entries where title like '切'";
 		// DictEntry.query(testQuery);
+		// get_menu_by_id ();
 	}
 
 	protected override void startup () {
 		base.startup ();
 		add_action_entries(actions, this);
-		set_accels_for_action("app.quit", {"<Primary>Q"});
+		set_accels_for_action("app.quit", test);
 	}
-
-	void about() {
-        unowned List<Gtk.Window> windows = get_windows();
-        Gtk.show_about_dialog (
-            windows != null ? windows.data : null,
-            "program-name", "Showdown",
-            "version", "0.4",
-            "comments", "Simple Markdown viewer",
-            "copyright", "Copyright 2015 Craig Barnes",
-            "logo-icon-name", "showdown",
-            "license-type", Gtk.License.GPL_3_0,
-            "website", "https://github.com/craigbarnes/showdown"
-        );
-    }
 }
 
 int main(string[] args) {
