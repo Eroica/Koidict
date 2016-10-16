@@ -36,7 +36,7 @@ public class AppWindow : Gtk.ApplicationWindow {
 
 	[GtkCallback]
 	private void searchChanged (SearchEntry s) {
-		var results = KoiDB.singleton().queryTitle(s.text);
+		var results = KoiDB.Singleton().QueryTitle(s.text);
 		print(@"are you looking for ... " + s.text + "\n");
 		// print ("%s\n", list.nth_data(0));
 		foreach (string element in results) {
