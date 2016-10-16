@@ -36,18 +36,14 @@ public class AppWindow : Gtk.ApplicationWindow {
 
 	[GtkCallback]
 	private void searchChanged (SearchEntry s) {
-		string t = s.text;
-		print (@"are you looking for ... $t\n");
+		var results = KoiDB.singleton().queryTitle(s.text);
+		print(@"are you looking for ... " + s.text + "\n");
 		// print ("%s\n", list.nth_data(0));
-		foreach (string element in list) {
-			if (t == element) {
-				KoiResultsList.insert (new ResultEntry (t), -1);
-			}
+		foreach (string element in results) {
+			print(element + "\n");
+		//	KoiResultsList.insert(new ResultEntry(element), -1);
 			
 		}
-
-		var testQuery = @"select * from entries where title like '$t'";
-		DictEntry.query(testQuery);
 		// print ("It seems like you are looking for: %s\n", s.text);
 	}
 

@@ -51,9 +51,6 @@ public class MyApplication : Gtk.Application {
 
 		Gtk.ApplicationWindow window = new AppWindow (this);
 		window.show ();
-		// var testQuery = "select * from entries where title like '切'";
-		// DictEntry.query(testQuery);
-		// get_menu_by_id ();
 	}
 
 	protected override void startup () {

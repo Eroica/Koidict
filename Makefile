@@ -17,5 +17,5 @@ resources.c: koidict.gresource.xml $(wildcard *.ui)
 
 koidictall: ui koidict
 
-koidict: $(wildcard *.vala) model/dict_entry.vala resources.c
+koidict: $(wildcard *.vala) $(wildcard model/*.vala) resources.c
 	valac -o $@ $^ --pkg gtk+-3.0 --pkg sqlite3 --target-glib=2.38 --gresources=koidict.gresource.xml
