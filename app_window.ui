@@ -35,12 +35,13 @@
         <property name="position_set">True</property>
         <child>
           <object class="GtkListBox" id="KoiResultsList">
+            <property name="width_request">150</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
           </object>
           <packing>
             <property name="resize">True</property>
-            <property name="shrink">True</property>
+            <property name="shrink">False</property>
           </packing>
         </child>
         <child>
