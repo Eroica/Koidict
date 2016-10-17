@@ -40,7 +40,7 @@ public class AppWindow : Gtk.ApplicationWindow {
 	private void searchChanged (SearchEntry s) {
 		model.remove_all ();
 		if (s.text != "") {
-			var results = KoiDB.singleton().queryTitle(s.text);
+			var results = KoiDB.Singleton().QueryTitle(s.text);
 			foreach (string element in results) {
 				model.append (new ResultEntry (element));
 			}
