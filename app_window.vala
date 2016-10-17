@@ -14,6 +14,8 @@ public class ResultEntry : Label {
 [GtkTemplate (ui = "/org/koidict/app/app_window.ui")]
 public class AppWindow : Gtk.ApplicationWindow {
 
+	[GtkChild] private ListBox KoiResultsList;
+	[GtkChild] public HeaderBar KoiHeaderBar;
 	private GLib.ListStore model = new GLib.ListStore (typeof (ResultEntry));
 
 	public AppWindow (Gtk.Application app) {
@@ -39,17 +41,9 @@ public class AppWindow : Gtk.ApplicationWindow {
 		model.remove_all ();
 		if (s.text != "") {
 			var results = KoiDB.singleton().queryTitle(s.text);
-			print(@"are you looking for ... " + s.text + "\n");
-
 			foreach (string element in results) {
 				model.append (new ResultEntry (element));
 			}
 		}
 	}
-
-	[GtkChild]
-	private ListBox KoiResultsList;
-
-	[GtkChild]
-	public HeaderBar KoiHeaderBar;
 }
