@@ -1,7 +1,7 @@
 using Gtk;
 
-const string WINDOW_BUTTONS_RIGHT = "menu:minimize,maximize,close";
-const string WINDOW_BUTTONS_LEFT = "minimize,maximize,close:menu";
+const string WINDOW_BUTTONS_RIGHT = "menu:";
+const string WINDOW_BUTTONS_LEFT = ":menu";
 
 [GtkTemplate (ui = "/org/koidict/app/result_entry.ui")]
 public class ResultEntry : Label {
@@ -21,10 +21,10 @@ public class AppWindow : Gtk.ApplicationWindow {
 	public AppWindow (Gtk.Application app) {
 		Object(application: app);
 
-		// By default, the header bar's buttons are located on the right side (assuming that the window buttons are located on the left).
-		// The following code changes their position to the left if the window buttons are found on the right.		
-		if (Gtk.Settings.get_default ().gtk_decoration_layout == WINDOW_BUTTONS_RIGHT) {
-			KoiHeaderBar.@foreach ((child) => KoiHeaderBar.child_set_property (child, "pack-type", Gtk.PackType.START));
+		// If the current WM settings place the window buttons on the left instead of the right,
+		// move all HeaderBar items to the right.
+		if (WINDOW_BUTTONS_LEFT in Gtk.Settings.get_default ().gtk_decoration_layout) {
+			KoiHeaderBar.@foreach ((child) => KoiHeaderBar.child_set_property (child, "pack-type", Gtk.PackType.END));
 		}
 		
 		KoiResultsList.bind_model (model, item => { return item as ResultEntry; });
