@@ -30,6 +30,13 @@ public class AppWindow : Gtk.ApplicationWindow {
 		KoiResultsList.bind_model (model, item => { return item as ResultEntry; });
 	}
 
+	[GtkCallback]
+	private void results_row_selected(ListBoxRow? row) {
+		if (row != null) {
+			var result_entry = model.get_item (row.get_index ()) as ResultEntry;
+			var dict_entry = KoiDB.Singleton ().Get (result_entry.label);
+		} 
+	}
 
 	[GtkCallback]
 	private void stopSearch (SearchEntry s) {
