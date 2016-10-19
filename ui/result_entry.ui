@@ -5,6 +5,9 @@
   <template class="ResultEntry" parent="GtkLabel">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
+    <property name="halign">start</property>
     <property name="label" translatable="yes">label</property>
+    <property name="ellipsize">end</property>
+    <property name="single_line_mode">True</property>
   </template>
 </interface>

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
 	<gresource prefix="/org/koidict/app">
-		<file compressed="true" preprocess="xml-stripblanks">ui/application_window.ui</file>
-		<file compressed="true" preprocess="xml-stripblanks">app_window.ui</file>
-		<file compressed="true" preprocess="xml-stripblanks">result_entry.ui</file>
-		<file>style.css</file>
+		<file compressed="true" preprocess="xml-stripblanks">ui/app_window.ui</file>
+		<file compressed="true" preprocess="xml-stripblanks">ui/result_entry.ui</file>
+		<file>ui/style.css</file>
 	</gresource>
 	<gresource prefix="/org/koidict/app/gtk">
-		<file>menus.ui</file>
+		<file>ui/menus.ui</file>
 	</gresource>
 </gresources>

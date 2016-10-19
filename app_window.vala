@@ -3,7 +3,7 @@ using Gtk;
 const string WINDOW_BUTTONS_RIGHT = "menu:";
 const string WINDOW_BUTTONS_LEFT = ":menu";
 
-[GtkTemplate (ui = "/org/koidict/app/result_entry.ui")]
+[GtkTemplate (ui = "/org/koidict/app/ui/result_entry.ui")]
 public class ResultEntry : Label {
 	public ResultEntry (string? str) {
 		set_label (str);
@@ -11,7 +11,7 @@ public class ResultEntry : Label {
 }
 
 
-[GtkTemplate (ui = "/org/koidict/app/app_window.ui")]
+[GtkTemplate (ui = "/org/koidict/app/ui/app_window.ui")]
 public class AppWindow : Gtk.ApplicationWindow {
 
 	[GtkChild] private ListBox KoiResultsList;
