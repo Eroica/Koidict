@@ -33,6 +33,26 @@ class DictEntry {
 		Link = link ?? "";
 	}
 
+	public string String() {
+		return @"
+		Entry ID: $EntryID
+		HeteronymID: $HeteronymID
+		Definition ID: $DefinitionID
+		Title: $Title
+		Radical: $Radical
+		Stroke count: $StrokeCount
+		Non-radical stroke count: $NonRadicalStrokeCount
+		Bopomofo: $Bopomofo
+		Pinyin: $Pinyin
+		Word type: $WordType
+		Definition: $Definition
+		Example: $Example
+		Quote: $Quote
+		Synonyms: $Synonyms
+		Antonyms: $Antonyms
+		Link: $Link
+		";
+	}
 	public const string DictID = "1";
 	public int EntryID { get; private set;}
 	public int HeteronymID { get; private set;}
@@ -52,4 +72,5 @@ class DictEntry {
 	public string Quote { get; private set; }
 	public string Synonyms { get; private set; }
 	public string Antonyms { get; private set; }
+	public string Link { get; private set; }
 }

@@ -35,6 +35,7 @@ public class AppWindow : Gtk.ApplicationWindow {
 		if (row != null) {
 			var result_entry = model.get_item (row.get_index ()) as ResultEntry;
 			var dict_entry = KoiDB.Singleton ().Get (result_entry.label);
+			print(dict_entry.String());
 		} 
 	}
 
