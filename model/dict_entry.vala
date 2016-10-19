@@ -1,25 +1,38 @@
 class DictEntry {
-	public DictEntry(string entryId, string heteronymId, string definitionId, 
-					 string title, string? radical, string? strokeCount, string? nonRadicalStrokeCount,
-					 string? bopomofo, string? pinyin, string? wordType, string? definition, string? example,
-					 string? quote, string? synonyms, string? antonyms) {
+	public DictEntry(string entryId, 
+					 string heteronymId, 
+					 string definitionId, 
+					 string title, 
+					 string? radical, 
+					 string? strokeCount, 
+					 string? nonRadicalStrokeCount,
+	 				 string? bopomofo, 
+	 				 string? pinyin,
+	 				 string? wordType, 
+	 				 string? definition, 
+	 				 string? example,
+					 string? quote, 
+					 string? synonyms, 
+					 string? antonyms,
+					 string? link) {
 		EntryID = int.parse(entryId);
 		HeteronymID = int.parse(heteronymId);
 		DefinitionID = int.parse(definitionId);
 		Title = title;
-		Radical = radical;
-		StrokeCount = int.parse(strokeCount);
-		NonRadicalStrokeCount = int.parse(nonRadicalStrokeCount);
-		Bopomofo = bopomofo;
-		Pinyin = pinyin;
-		WordType = wordType;
-		Definition = definition;
-		Example = example;
-		Quote = quote;
-		Synonyms = synonyms;
-		Antonyms = antonyms;
-
+		Radical = radical ?? "";
+		StrokeCount = (strokeCount != null) ? int.parse(strokeCount) : 0;
+		NonRadicalStrokeCount = (nonRadicalStrokeCount != null) ? int.parse(nonRadicalStrokeCount) : 0;
+		Bopomofo = bopomofo ?? "";
+		Pinyin = pinyin ?? "";
+		WordType = wordType ?? "";
+		Definition = definition ?? "";
+		Example = example ?? "";
+		Quote = quote ?? "";
+		Synonyms = synonyms ?? "";
+		Antonyms = antonyms ?? "";
+		Link = link ?? "";
 	}
+
 	public const string DictID = "1";
 	public int EntryID { get; private set;}
 	public int HeteronymID { get; private set;}

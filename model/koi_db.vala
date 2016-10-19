@@ -48,10 +48,22 @@ class KoiDB {
 
 		var definitionQuery = "select * from definitions where heteronym_id = " + heteronym[HeteronymColumns.Id];
 		var def = query(definitionQuery);
-
-		return new DictEntry(entry[EntryColumns.Id], heteronym[HeteronymColumns.Id], def[DefinitionColumns.Id],
-							 entry[EntryColumns.Title], entry[EntryColumns.Radical], entry[EntryColumns.StrokeCount], entry[EntryColumns.NonRadicalStrokeCount],
-							 heteronym[HeteronymColumns.Bopomofo], heteronym[HeteronymColumns.Pinyin],
-							 def[DefinitionColumns.Def], def[DefinitionColumns.Example], def[DefinitionColumns.Quote], def[DefinitionColumns.Synonyms], def[DefinitionColumns.Antonyms], def[DefinitionColumns.Link]);
+		
+		return new DictEntry(entry[EntryColumns.Id], 
+							 heteronym[HeteronymColumns.Id], 
+							 def[DefinitionColumns.Id],
+							 entry[EntryColumns.Title], 
+							 entry[EntryColumns.Radical], 
+							 entry[EntryColumns.StrokeCount], 
+							 entry[EntryColumns.NonRadicalStrokeCount],
+							 heteronym[HeteronymColumns.Bopomofo], 
+							 heteronym[HeteronymColumns.Pinyin],
+							 def[DefinitionColumns.Type], 
+							 def[DefinitionColumns.Def],
+							 def[DefinitionColumns.Example], 
+							 def[DefinitionColumns.Quote], 
+							 def[DefinitionColumns.Synonyms], 
+							 def[DefinitionColumns.Antonyms], 
+							 def[DefinitionColumns.Link]);
 	}
 }
