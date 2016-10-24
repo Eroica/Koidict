@@ -6,6 +6,6 @@
 		<file>ui/style.css</file>
 	</gresource>
 	<gresource prefix="/org/koidict/app/gtk">
-		<file>ui/menus.ui</file>
+		<file>menus.ui</file>
 	</gresource>
 </gresources>
