@@ -2,3 +2,4 @@
 *.o
 *~
 /koidict
+**/.DS_Store
