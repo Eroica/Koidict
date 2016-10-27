@@ -18,7 +18,7 @@
 
 
 
-class DictEntry {
+public class DictEntry {
 	public DictEntry(string entryId, 
 					 string heteronymId, 
 					 string definitionId, 
@@ -35,6 +35,7 @@ class DictEntry {
 					 string? synonyms, 
 					 string? antonyms,
 					 string? link) {
+
 		EntryID = int.parse(entryId);
 		HeteronymID = int.parse(heteronymId);
 		DefinitionID = int.parse(definitionId);
@@ -73,6 +74,7 @@ class DictEntry {
 		Link: $Link
 		";
 	}
+	
 	public const string DictID = "1";
 	public int EntryID { get; private set;}
 	public int HeteronymID { get; private set;}
