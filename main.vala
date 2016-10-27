@@ -18,26 +18,21 @@
 
 using Gtk;
 
+const string PRGNAME = "koidict";
+
 public class MyApplication : Gtk.Application {
-
-	const GLib.ActionEntry[] actions = {
-		{"quit", quit},
-		{"about", null},
-	};
-
-	const string[] test = {"<Primary>Q"};
 
 	public MyApplication () {
 		Object(application_id: "org.koidict.app", flags: ApplicationFlags.FLAGS_NONE);
-
 	}
 
 	protected override void activate () {
 		var css = new CssProvider ();
 		css.load_from_resource (@"$resource_base_path/ui/style.css");
 
-		Gtk.StyleContext.add_provider_for_screen (
-			Gdk.Screen.get_default (), css, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+		Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (),
+												  css,
+												  Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
 		Gtk.ApplicationWindow window = new AppWindow (this);
 		window.show ();
@@ -45,12 +40,14 @@ public class MyApplication : Gtk.Application {
 
 	protected override void startup () {
 		base.startup ();
-		add_action_entries(actions, this);
-		set_accels_for_action("app.quit", test);
 	}
 }
 
 int main(string[] args) {
+	Environment.set_prgname (PRGNAME);
+	var DB_LOCATION = Environment.get_user_data_dir () + "/" + PRGNAME + "/" + "dict-revised.sqlite3";
+	var tmp = FileUtils.test (DB_LOCATION, FileTest.EXISTS);
+	
 	MyApplication app = new MyApplication ();
 	return app.run (args);
 }

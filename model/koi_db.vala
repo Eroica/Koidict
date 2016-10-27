@@ -28,7 +28,7 @@ class KoiDB {
 	private static KoiDB instance;
 	
 	private KoiDB() {
-		var rc = Database.open("/path/to/koidict/data/dict-revised.sqlite3", out dictDb);
+		var rc = Database.open(Environment.get_user_data_dir () + "/" + Environment.get_prgname () + "/" + "dict-revised.sqlite3", out dictDb);
 		if (rc != Sqlite.OK) {
 			error("DB access failed with sql response code: %d\n", rc);
 		}
