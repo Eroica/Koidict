@@ -1,3 +1,11 @@
 button.tag {
 	border-radius: 20px;
 }
+
+label.DictEntryHeadword {
+	font-size: 24px;
+}
+
+label.DictEntryPronunciation {
+	font-size: 16px;
+}

@@ -3,6 +3,7 @@
 	<gresource prefix="/org/koidict/app">
 		<file compressed="true" preprocess="xml-stripblanks">ui/app_window.ui</file>
 		<file compressed="true" preprocess="xml-stripblanks">ui/result_entry.ui</file>
+		<file compressed="true" preprocess="xml-stripblanks">ui/entry_view.ui</file>
 		<file>ui/style.css</file>
 	</gresource>
 	<gresource prefix="/org/koidict/app/gtk">

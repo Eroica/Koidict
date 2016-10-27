@@ -35,6 +35,9 @@ public class AppWindow : Gtk.ApplicationWindow {
 
 	[GtkChild] private ListBox KoiResultsList;
 	[GtkChild] public HeaderBar KoiHeaderBar;
+	[GtkChild] private Viewport EntryWindow;
+
+	private KoiEntryView entry_view;
 	private GLib.ListStore model = new GLib.ListStore (typeof (ResultEntry));
 
 	public AppWindow (Gtk.Application app) {
@@ -47,14 +50,18 @@ public class AppWindow : Gtk.ApplicationWindow {
 		}
 		
 		KoiResultsList.bind_model (model, item => { return item as ResultEntry; });
+		entry_view = new KoiEntryView ();
+		EntryWindow.add (entry_view);
 	}
 
 	[GtkCallback]
 	private void results_row_selected(ListBoxRow? row) {
 		if (row != null) {
 			var result_entry = model.get_item (row.get_index ()) as ResultEntry;
-			var dict_entry = KoiDB.Singleton ().Get (result_entry.label);
+			var dict_entry = KoiDB.Singleton ()
+							 .Get (result_entry.label);
 			print(dict_entry.String());
+			entry_view.ChangeDictEntry (dict_entry);
 		} 
 	}
 
