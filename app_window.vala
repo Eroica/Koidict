@@ -25,7 +25,7 @@ const string WINDOW_BUTTONS_LEFT = ":menu";
 [GtkTemplate (ui = "/org/koidict/app/ui/result_entry.ui")]
 public class ResultEntry : Label {
 	public ResultEntry (string? str) {
-		set_label (str);
+		label = str;
 	}
 }
 
