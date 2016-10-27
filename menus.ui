@@ -4,15 +4,11 @@
   <menu id="app-menu">
     <section>
       <item>
-        <attribute name="label" translatable="yes">_New Window</attribute>
-        <attribute name="action">app.new_window</attribute>
-      </item>
-    </section>
-    <section>
-      <item>
         <attribute name="label" translatable="yes">_About</attribute>
         <attribute name="action">app.about</attribute>
       </item>
+    </section>
+    <section>
       <item>
         <attribute name="label" translatable="yes">_Quit</attribute>
         <attribute name="action">app.quit</attribute>
@@ -22,66 +18,26 @@
 
   <menu id="menubar">
     <submenu>
-      <attribute name="label" translatable="yes">_Preferences</attribute>
+      <attribute name="label" translatable="yes">File</attribute>
       <section>
         <item>
-          <attribute name="label" translatable="yes">_Prefer Dark Theme</attribute>
-          <attribute name="action">app.dark</attribute>
+          <attribute name="label" translatable="yes">Open Dictionaries Folder</attribute>
+          <attribute name="action">app.open_dict_folder</attribute>
+        </item>
+      </section>
+    </submenu>
+    <submenu>
+      <attribute name="label" translatable="yes">Go</attribute>
+      <section>
+        <item>
+          <attribute name="label" translatable="yes">Back</attribute>
+          <attribute name="action">app.back</attribute>
+          <attribute name="accel">&lt;Primary&gt;uparrow</attribute>
         </item>
         <item>
-          <attribute name="label" translatable="yes">_Hide Titlebar when maximized</attribute>
-          <attribute name="action">win.titlebar</attribute>
-        </item>
-        <submenu>
-          <attribute name="label" translatable="yes">_Color</attribute>
-          <section>
-            <item>
-              <attribute name="label" translatable="yes">_Red</attribute>
-              <attribute name="action">app.color</attribute>
-              <attribute name="target">red</attribute>
-              <attribute name="accel">&lt;Primary&gt;r</attribute>
-            </item>
-            <item>
-              <attribute name="label" translatable="yes">_Green</attribute>
-              <attribute name="action">app.color</attribute>
-              <attribute name="target">green</attribute>
-              <attribute name="accel">&lt;Primary&gt;g</attribute>
-            </item>
-            <item>
-              <attribute name="label" translatable="yes">_Blue</attribute>
-              <attribute name="action">app.color</attribute>
-              <attribute name="target">blue</attribute>
-              <attribute name="accel">&lt;Primary&gt;b</attribute>
-            </item>
-          </section>
-        </submenu>
-        <submenu>
-          <attribute name="label" translatable="yes">_Shape</attribute>
-          <section>
-            <item>
-              <attribute name="label" translatable="yes">_Square</attribute>
-              <attribute name="action">win.shape</attribute>
-              <attribute name="target">square</attribute>
-              <attribute name="accel">&lt;Primary&gt;s</attribute>
-            </item>
-            <item>
-              <attribute name="label" translatable="yes">_Rectangle</attribute>
-              <attribute name="action">win.shape</attribute>
-              <attribute name="target">rectangle</attribute>
-              <attribute name="accel">&lt;Primary&gt;r</attribute>
-            </item>
-            <item>
-              <attribute name="label" translatable="yes">_Oval</attribute>
-              <attribute name="action">win.shape</attribute>
-              <attribute name="target">oval</attribute>
-              <attribute name="accel">&lt;Primary&gt;o</attribute>
-            </item>
-          </section>
-        </submenu>
-        <item>
-          <attribute name="label" translatable="yes">_Bold</attribute>
-          <attribute name="action">win.bold</attribute>
-          <attribute name="accel">&lt;Primary&gt;&lt;Shift&gt;b</attribute>
+          <attribute name="label" translatable="yes">Forward</attribute>
+          <attribute name="action">app.forward</attribute>
+          <attribute name="accel">&lt;Primary&gt;downarrow</attribute>
         </item>
       </section>
     </submenu>
