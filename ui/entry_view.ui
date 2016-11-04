@@ -3,20 +3,7 @@
 <interface>
   <requires lib="gtk+" version="3.20"/>
   <!-- interface-css-provider-path style.css -->
-  <object class="GtkTextTagTable" id="DefinitionTags">
-    <child type="tag">
-      <object class="GtkTextTag" id="huhu">
-        <property name="name">TransparentBackground</property>
-        <property name="background">#ff0000</property>
-        <property name="font">Normal</property>
-        <property name="size">9</property>
-        <property name="editable">False</property>
-        <property name="wrap_mode">word</property>
-      </object>
-    </child>
-  </object>
   <object class="GtkTextBuffer" id="DefinitionBuffer">
-    <property name="tag_table">DefinitionTags</property>
     <property name="text" translatable="yes">Testtest</property>
   </object>
   <template class="KoiEntryView" parent="GtkBox">
@@ -70,6 +57,9 @@
         <property name="wrap_mode">word</property>
         <property name="cursor_visible">False</property>
         <property name="buffer">DefinitionBuffer</property>
+        <style>
+          <class name="DictEntryDefinition"/>
+        </style>
       </object>
       <packing>
         <property name="expand">False</property>

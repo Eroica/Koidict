@@ -25,7 +25,6 @@ public class KoiEntryView : Box {
 	[GtkChild] private Label Title;
 	[GtkChild] private Label Bopomofo;
 	[GtkChild] private TextBuffer DefinitionBuffer;
-	[GtkChild] private TextTag huhu;
 
 	public void ChangeDictEntry(DictEntry d) {
 		Title.label = d.Title;

@@ -9,3 +9,6 @@ label.DictEntryHeadword {
 label.DictEntryPronunciation {
 	font-size: 16px;
 }
+
+textview.DictEntryDefinition text {background-color: transparent; }
+textview.DictEntryDefinition {background-color: transparent; font-size: 18px;}
