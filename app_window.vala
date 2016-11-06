@@ -58,10 +58,12 @@ public class AppWindow : Gtk.ApplicationWindow {
 	private void results_row_selected(ListBoxRow? row) {
 		if (row != null) {
 			var result_entry = model.get_item (row.get_index ()) as ResultEntry;
-			var dict_entry = KoiDB.Singleton ()
+			var dict_entries = KoiDB.Singleton ()
 							 .Get (result_entry.label);
-			print(dict_entry.String());
-			entry_view.ChangeDictEntry (dict_entry);
+			for (int i = 0; i < dict_entries.length; i++) {
+				print(@"$(dict_entries.index(i))");
+			}
+			entry_view.ChangeDictEntry (dict_entries.index(0));
 		} 
 	}
 
