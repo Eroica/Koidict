@@ -1,5 +1,9 @@
-button.tag {
-	border-radius: 20px;
+label.DictEntryCategory {
+	border-radius: 4px;
+	border: 1px solid black;
+	background: black;
+	padding: 4px;
+	font-size: 16px;
 }
 
 label.DictEntryHeadword {
@@ -7,8 +11,13 @@ label.DictEntryHeadword {
 }
 
 label.DictEntryPronunciation {
+	font-size: 12px;
+}
+
+label.DictEntryIndex {
 	font-size: 16px;
 }
 
-textview.DictEntryDefinition text {background-color: transparent; }
-textview.DictEntryDefinition {background-color: transparent; font-size: 18px;}
+textview.NoBackground text {background-color: transparent; }
+textview.NoBackground {background-color: transparent; }
+textview.DictEntryMeanings { font-size: 16px; }

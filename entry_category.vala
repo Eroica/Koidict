@@ -19,26 +19,26 @@
 
 using Gtk;
 
-[GtkTemplate (ui = "/org/koidict/app/ui/entry_view.ui")]
-public class KoiEntryView : Box {
+[GtkTemplate (ui = "/org/koidict/app/ui/entry_category.ui")]
+public class KoiEntryCategory : Box {
 
-	[GtkChild] private Label title;
-	[GtkChild] private Label bopomofo;
-	[GtkChild] private Label pinyin;
-	[GtkChild] private ListBox koiCategoryList;
+	[GtkChild] private Label type;
+	[GtkChild] private ListBox meaningsList;
+	private GLib.ListStore model = new GLib.ListStore (typeof (KoiEntryMeaning));
 
-	private GLib.ListStore model = new GLib.ListStore (typeof (KoiEntryCategory));
+	public KoiEntryCategory(DictEntry d) {
+		meaningsList.bind_model (model, item => { return item as KoiEntryMeaning; });
+		this.type.label = "type";
 
-	public KoiEntryView() {
-		koiCategoryList.bind_model (model, item => { return item as KoiEntryCategory; });
+		for (var i = 0; i < 1; i++) {
+			model.append (new KoiEntryMeaning (1));
+		}
+		// for (var i = 0; i < meanings.length; i++) {
+		// 	model.append (new KoiEntryMeaning (i, meanings[i]));
+		// }
 	}
 
-	public void ChangeDictEntry(DictEntry d) {
-		title.label = d.Title;
-		bopomofo.label = d.Bopomofo;
-		pinyin.label = d.Pinyin;
-		model.remove_all();
-		model.append(new KoiEntryCategory(d));
-		// DefinitionBuffer.text = d.Definition;
+	public void ChangeDictEntry(string type, DictEntry[] meanings) {
+
 	}
 }

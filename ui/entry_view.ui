@@ -3,9 +3,6 @@
 <interface>
   <requires lib="gtk+" version="3.20"/>
   <!-- interface-css-provider-path style.css -->
-  <object class="GtkTextBuffer" id="DefinitionBuffer">
-    <property name="text" translatable="yes">Testtest</property>
-  </object>
   <template class="KoiEntryView" parent="GtkBox">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -16,11 +13,11 @@
     <property name="orientation">vertical</property>
     <property name="spacing">12</property>
     <child>
-      <object class="GtkLabel" id="Title">
+      <object class="GtkLabel" id="title">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="halign">start</property>
-        <property name="label" translatable="yes">Headword</property>
+        <property name="label" translatable="yes">上</property>
         <property name="selectable">True</property>
         <style>
           <class name="DictEntryHeadword"/>
@@ -33,14 +30,59 @@
       </packing>
     </child>
     <child>
-      <object class="GtkLabel" id="Bopomofo">
+      <object class="GtkBox">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="halign">start</property>
-        <property name="label" translatable="yes">ㄅㄆㄇㄈ</property>
-        <style>
-          <class name="DictEntryPronunciation"/>
-        </style>
+        <property name="spacing">4</property>
+        <child>
+          <object class="GtkLabel" id="bopomofo">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="opacity">0.75</property>
+            <property name="halign">start</property>
+            <property name="label" translatable="yes">ㄕㄤˋ</property>
+            <property name="selectable">True</property>
+            <style>
+              <class name="DictEntryPronunciation"/>
+            </style>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_left">4</property>
+            <property name="margin_right">4</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="pinyin">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="opacity">0.75</property>
+            <property name="halign">start</property>
+            <property name="label" translatable="yes">shàng</property>
+            <property name="selectable">True</property>
+            <style>
+              <class name="DictEntryPronunciation"/>
+            </style>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
       </object>
       <packing>
         <property name="expand">False</property>
@@ -49,58 +91,15 @@
       </packing>
     </child>
     <child>
-      <object class="GtkTextView">
+      <object class="GtkListBox" id="koiCategoryList">
         <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="pixels_inside_wrap">6</property>
-        <property name="editable">False</property>
-        <property name="wrap_mode">word</property>
-        <property name="cursor_visible">False</property>
-        <property name="buffer">DefinitionBuffer</property>
-        <style>
-          <class name="DictEntryDefinition"/>
-        </style>
+        <property name="can_focus">False</property>
+        <property name="selection_mode">none</property>
       </object>
       <packing>
         <property name="expand">False</property>
         <property name="fill">True</property>
         <property name="position">2</property>
-      </packing>
-    </child>
-    <child>
-      <placeholder/>
-    </child>
-    <child>
-      <placeholder/>
-    </child>
-    <child>
-      <placeholder/>
-    </child>
-    <child>
-      <placeholder/>
-    </child>
-    <child>
-      <placeholder/>
-    </child>
-    <child>
-      <placeholder/>
-    </child>
-    <child>
-      <object class="GtkButton">
-        <property name="label" translatable="yes">button</property>
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="receives_default">True</property>
-        <property name="halign">start</property>
-        <property name="valign">start</property>
-        <style>
-          <class name="tag"/>
-        </style>
-      </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">True</property>
-        <property name="position">9</property>
       </packing>
     </child>
   </template>

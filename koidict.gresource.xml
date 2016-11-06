@@ -4,6 +4,8 @@
 		<file compressed="true" preprocess="xml-stripblanks">ui/app_window.ui</file>
 		<file compressed="true" preprocess="xml-stripblanks">ui/result_entry.ui</file>
 		<file compressed="true" preprocess="xml-stripblanks">ui/entry_view.ui</file>
+		<file compressed="true" preprocess="xml-stripblanks">ui/entry_category.ui</file>
+		<file compressed="true" preprocess="xml-stripblanks">ui/entry_meaning.ui</file>
 		<file>ui/style.css</file>
 	</gresource>
 	<gresource prefix="/org/koidict/app/gtk">
