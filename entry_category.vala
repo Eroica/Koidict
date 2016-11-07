@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
- 
+
 
 using Gtk;
 
@@ -23,22 +23,20 @@ using Gtk;
 public class KoiEntryCategory : Box {
 
 	[GtkChild] private Label type;
-	[GtkChild] private ListBox meaningsList;
-	private GLib.ListStore model = new GLib.ListStore (typeof (KoiEntryMeaning));
+	[GtkChild] private Box meaningsBox;
 
-	public KoiEntryCategory(DictEntry d) {
-		meaningsList.bind_model (model, item => { return item as KoiEntryMeaning; });
-		this.type.label = "type";
-
-		for (var i = 0; i < 1; i++) {
-			model.append (new KoiEntryMeaning (1));
+	public KoiEntryCategory(DictEntry[] entries) {
+		foreach (var e in entries) {
+			if (e.WordType == "") {
+				type.destroy();
+			} else {
+				this.type.label = e.WordType;
+			}
+			break;
 		}
-		// for (var i = 0; i < meanings.length; i++) {
-		// 	model.append (new KoiEntryMeaning (i, meanings[i]));
-		// }
-	}
 
-	public void ChangeDictEntry(string type, DictEntry[] meanings) {
-
+		for (var i = 0; i < entries.length; i++) {
+			meaningsBox.pack_start(new KoiEntryMeaning (i + 1, entries[i]));
+		}
 	}
 }

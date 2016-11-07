@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
- 
+
 
 using Gtk;
 
@@ -25,8 +25,12 @@ public class KoiEntryMeaning : Box {
 	[GtkChild] private Label index;
 	[GtkChild] private TextBuffer meaningBuffer;
 
-	public KoiEntryMeaning(int index) {
-		this.index.label = index.to_string();
-		meaningBuffer.text = "huhu\nneue Zeile";
+	public KoiEntryMeaning(int index, DictEntry d) {
+		if (index == 0) {
+			this.index.destroy();
+		} else {
+			this.index.label = index.to_string() + ".";
+		}
+		meaningBuffer.text = d.Definition;
 	}
 }

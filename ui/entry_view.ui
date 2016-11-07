@@ -91,10 +91,13 @@
       </packing>
     </child>
     <child>
-      <object class="GtkListBox" id="koiCategoryList">
+      <object class="GtkBox" id="categoriesBox">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="selection_mode">none</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <placeholder/>
+        </child>
       </object>
       <packing>
         <property name="expand">False</property>

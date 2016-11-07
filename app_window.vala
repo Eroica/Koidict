@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
- 
+
 
 using Gtk;
 
@@ -35,9 +35,8 @@ public class AppWindow : Gtk.ApplicationWindow {
 
 	[GtkChild] private ListBox KoiResultsList;
 	[GtkChild] public HeaderBar KoiHeaderBar;
-	[GtkChild] private Viewport EntryWindow;
+	[GtkChild] private Box DefinitionsView;
 
-	private KoiEntryView entry_view;
 	private GLib.ListStore model = new GLib.ListStore (typeof (ResultEntry));
 
 	public AppWindow (Gtk.Application app) {
@@ -50,8 +49,6 @@ public class AppWindow : Gtk.ApplicationWindow {
 		}
 		
 		KoiResultsList.bind_model (model, item => { return item as ResultEntry; });
-		entry_view = new KoiEntryView ();
-		EntryWindow.add (entry_view);
 	}
 
 	[GtkCallback]
@@ -59,11 +56,33 @@ public class AppWindow : Gtk.ApplicationWindow {
 		if (row != null) {
 			var result_entry = model.get_item (row.get_index ()) as ResultEntry;
 			var dict_entries = KoiDB.Singleton ()
-							 .Get (result_entry.label);
+			.Get (result_entry.label);
 			for (int i = 0; i < dict_entries.length; i++) {
 				print(@"$(dict_entries.index(i))");
 			}
-			entry_view.ChangeDictEntry (dict_entries.index(0));
+
+			DictEntry[] ds = {};
+			for (var i=0; i < dict_entries.length; i++) {
+				ds += dict_entries.index(i);
+			}
+
+			int[] heteronym_ids = {};
+			for (var i=0; i < dict_entries.length; i++) {
+				if (!(dict_entries.index(i).HeteronymID in heteronym_ids)) {
+					heteronym_ids += dict_entries.index(i).HeteronymID;
+				}
+			}
+
+			DefinitionsView.@foreach(child => child.destroy());
+			foreach (var id in heteronym_ids) {
+				DictEntry[] entries = {};
+				foreach (var d in ds) {
+					if (d.HeteronymID == id) {
+						entries += d;
+					}
+				}
+				DefinitionsView.pack_start(new KoiEntryView(id, entries));
+			}
 		} 
 	}
 

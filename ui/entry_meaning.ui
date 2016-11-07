@@ -34,6 +34,8 @@
       <object class="GtkTextView" id="meaning">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
+        <property name="hexpand">True</property>
+        <property name="vexpand">True</property>
         <property name="editable">False</property>
         <property name="buffer">meaningBuffer</property>
         <property name="input_purpose">alpha</property>

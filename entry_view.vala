@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
- 
+
 
 using Gtk;
 
@@ -25,20 +25,38 @@ public class KoiEntryView : Box {
 	[GtkChild] private Label title;
 	[GtkChild] private Label bopomofo;
 	[GtkChild] private Label pinyin;
-	[GtkChild] private ListBox koiCategoryList;
+	[GtkChild] private Box categoriesBox;
 
-	private GLib.ListStore model = new GLib.ListStore (typeof (KoiEntryCategory));
+	public KoiEntryView(int heteronym_id, DictEntry[] entries) {
+		foreach (var e in entries) {
+			title.label = e.Title;
+			bopomofo.label = e.Bopomofo;
+			pinyin.label = e.Pinyin;
+			break;
+		}
 
-	public KoiEntryView() {
-		koiCategoryList.bind_model (model, item => { return item as KoiEntryCategory; });
-	}
-
-	public void ChangeDictEntry(DictEntry d) {
-		title.label = d.Title;
-		bopomofo.label = d.Bopomofo;
-		pinyin.label = d.Pinyin;
-		model.remove_all();
-		model.append(new KoiEntryCategory(d));
-		// DefinitionBuffer.text = d.Definition;
+		string[] categories = {};
+		DictEntry[] entries_without_category = {};
+		foreach (var e in entries) {
+			if (e.WordType == "") {
+				entries_without_category += e;
+			} else if (!(e.WordType in categories)) {
+				categories += e.WordType;
+			}
+		}
+		if (categories.length > 0) {
+			foreach (var c in categories) {
+				DictEntry[] filtered_entries = {};
+				foreach (var e in entries) {
+					if (e.WordType == c) {
+						filtered_entries += e;
+					}
+				}
+				categoriesBox.pack_end(new KoiEntryCategory(filtered_entries));
+			}
+		}
+		if (entries_without_category.length > 0) {
+			categoriesBox.pack_end(new KoiEntryCategory(entries_without_category));
+		}
 	}
 }
