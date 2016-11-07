@@ -19,42 +19,7 @@
 
 
 public class DictEntry {
-	public DictEntry(string entryId, 
-					 string heteronymId, 
-					 string definitionId, 
-					 string title, 
-					 string? radical, 
-					 string? strokeCount, 
-					 string? nonRadicalStrokeCount,
-	 				 string? bopomofo, 
-	 				 string? pinyin,
-	 				 string? wordType, 
-	 				 string? definition, 
-	 				 string? example,
-					 string? quote, 
-					 string? synonyms, 
-					 string? antonyms,
-					 string? link) {
-
-		EntryID = int.parse(entryId);
-		HeteronymID = int.parse(heteronymId);
-		DefinitionID = int.parse(definitionId);
-		Title = title;
-		Radical = radical ?? "";
-		StrokeCount = (strokeCount != null) ? int.parse(strokeCount) : 0;
-		NonRadicalStrokeCount = (nonRadicalStrokeCount != null) ? int.parse(nonRadicalStrokeCount) : 0;
-		Bopomofo = bopomofo ?? "";
-		Pinyin = pinyin ?? "";
-		WordType = wordType ?? "";
-		Definition = definition ?? "";
-		Example = example ?? "";
-		Quote = quote ?? "";
-		Synonyms = synonyms ?? "";
-		Antonyms = antonyms ?? "";
-		Link = link ?? "";
-	}
-
-	public string String() {
+	public string to_string() {
 		return @"
 		Entry ID: $EntryID
 		HeteronymID: $HeteronymID
@@ -76,23 +41,23 @@ public class DictEntry {
 	}
 	
 	public const string DictID = "1";
-	public int EntryID { get; private set;}
-	public int HeteronymID { get; private set;}
-	public int DefinitionID { get; private set; }
+	public int EntryID {get; set; default = 0;}
+	public int HeteronymID {get; set; default = 0;}
+	public int DefinitionID {get; set; default = 0;}
 
-	public string Title { get; private set; }
+	public string Title {get; set; default = "";}
 
-	public string Radical { get; private set; }
-	public int StrokeCount { get; private set; }
-	public int NonRadicalStrokeCount { get; private set; }
-	public string Bopomofo { get; private set; }
-	public string Pinyin { get; private set; }
+	public string Radical {get; set; default = "";}
+	public int StrokeCount {get; set; default = 0;}
+	public int NonRadicalStrokeCount {get; set; default = 0;}
+	public string Bopomofo {get; set; default = "";}
+	public string Pinyin {get; set; default = "";}
 
-	public string WordType { get; private set; }
-	public string Definition { get; private set; }
-	public string Example { get; private set; }
-	public string Quote { get; private set; }
-	public string Synonyms { get; private set; }
-	public string Antonyms { get; private set; }
-	public string Link { get; private set; }
+	public string WordType {get; set; default = "";}
+	public string Definition {get; set; default = "";}
+	public string Example {get; set; default = "";}
+	public string Quote {get; set; default = "";}
+	public string Synonyms {get; set; default = "";}
+	public string Antonyms {get; set; default = "";}
+	public string Link {get; set; default = "";}
 }

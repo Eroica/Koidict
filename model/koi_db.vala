@@ -20,9 +20,21 @@
 using Sqlite;
 
 class KoiDB {
-	enum EntryColumns {Id, Title, Radical, StrokeCount, NonRadicalStrokeCount, DictId}
-	enum HeteronymColumns {Id, EntryId, Idx, Bopomofo, Bopomofo2, Pinyin}
-	enum DefinitionColumns {Id, HeteronymId, Idx, Type, Def, Example, Quote, Synonyms, Antonyms, Link, Source}
+	enum EntryColumns {Id, Title, Radical, StrokeCount, NonRadicalStrokeCount, DictId;
+		public static int Num() {
+			return DictId + 1;
+		}
+	}
+	enum HeteronymColumns {Id, EntryId, Idx, Bopomofo, Bopomofo2, Pinyin;
+		public static int Num() {
+			return Pinyin + 1;
+		}
+	}
+	enum DefinitionColumns {Id, HeteronymId, Idx, Type, Def, Example, Quote, Synonyms, Antonyms, Link, Source;
+		public static int Num() {
+			return Source + 1;
+		}
+	}
 
 	private static Database dictDb;
 	private static KoiDB instance;
@@ -58,31 +70,46 @@ class KoiDB {
 		return query(titleQuery);
 	}
 
-	public DictEntry Get(string element) {
-		var entryQuery = @"select * from entries where title = \"$element\"";
-		var entry = query(entryQuery);
+	public Array<DictEntry> Get(string element) {
+		var entryQuery = @"select * from	entries as entry,
+									heteronyms  as heteronym,
+									definitions as definition
+							where	title = \"$element\" and
+									heteronym.entry_id = entry.id and
+									definition.heteronym_id = heteronym.id";
+		var entries = query(entryQuery);
+		var results = new Array<DictEntry>();
+		var allColumns = EntryColumns.Num() + HeteronymColumns.Num() + DefinitionColumns.Num();
+		for (int i = 0; i < entries.length - allColumns + 1; i += allColumns) {
+			results.append_val(new DictEntry());
+			var dictEntry = results.index(results.length - 1);
+			var hOffset = EntryColumns.Num();
+			var dOffset = hOffset + HeteronymColumns.Num();
 
-		var heteronymQuery = "select * from heteronyms where entry_id = " + entry[EntryColumns.Id];
-		var heteronym = query(heteronymQuery);
+			var entryId = entries[i + EntryColumns.Id];
+			dictEntry.EntryID = (entryId != null) ? int.parse(entryId) : 0;
+			dictEntry.Title = entries[i + EntryColumns.Title] ?? "";
+			dictEntry.Radical = entries[i + EntryColumns.Radical] ?? "";
+			var strokeCount = entries[i + EntryColumns.StrokeCount];
+			dictEntry.StrokeCount = (strokeCount != null) ? int.parse(strokeCount) : 0;
+			var nonRadicalStrokeCount = entries[i + EntryColumns.NonRadicalStrokeCount];
+			dictEntry.NonRadicalStrokeCount = (nonRadicalStrokeCount != null) ? int.parse(nonRadicalStrokeCount) : 0;
 
-		var definitionQuery = "select * from definitions where heteronym_id = " + heteronym[HeteronymColumns.Id];
-		var def = query(definitionQuery);
-		
-		return new DictEntry(entry[EntryColumns.Id], 
-							 heteronym[HeteronymColumns.Id], 
-							 def[DefinitionColumns.Id],
-							 entry[EntryColumns.Title], 
-							 entry[EntryColumns.Radical], 
-							 entry[EntryColumns.StrokeCount], 
-							 entry[EntryColumns.NonRadicalStrokeCount],
-							 heteronym[HeteronymColumns.Bopomofo], 
-							 heteronym[HeteronymColumns.Pinyin],
-							 def[DefinitionColumns.Type], 
-							 def[DefinitionColumns.Def],
-							 def[DefinitionColumns.Example], 
-							 def[DefinitionColumns.Quote], 
-							 def[DefinitionColumns.Synonyms], 
-							 def[DefinitionColumns.Antonyms], 
-							 def[DefinitionColumns.Link]);
+			var heteronymId = entries[i + hOffset + HeteronymColumns.Id];
+			dictEntry.HeteronymID = (heteronymId != null) ? int.parse(heteronymId) : 0;
+			dictEntry.Bopomofo = entries[i + hOffset + HeteronymColumns.Bopomofo] ?? "";
+			dictEntry.Pinyin = entries[i + hOffset + HeteronymColumns.Pinyin] ?? "";
+
+			var definitionId = entries[i + dOffset + DefinitionColumns.Id];
+			dictEntry.DefinitionID = (definitionId != null) ? int.parse(definitionId) : 0;
+			dictEntry.WordType = entries[i + dOffset + DefinitionColumns.Type] ?? "";
+			dictEntry.Definition = entries[i + dOffset + DefinitionColumns.Def] ?? "";
+			dictEntry.Example = entries[i + dOffset + DefinitionColumns.Example] ?? "";
+			dictEntry.Quote = entries[i + dOffset + DefinitionColumns.Quote] ?? "";
+			dictEntry.Synonyms = entries[i + dOffset + DefinitionColumns.Synonyms] ?? "";
+			dictEntry.Antonyms = entries[i + dOffset + DefinitionColumns.Antonyms] ?? "";
+			dictEntry.Link = entries[i + dOffset + DefinitionColumns.Link] ?? "";
+		}
+		return results;
 	}
 }
