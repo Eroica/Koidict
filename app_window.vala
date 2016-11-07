@@ -61,9 +61,9 @@ public class AppWindow : Gtk.ApplicationWindow {
 			var dict_entries = KoiDB.Singleton ()
 							 .Get (result_entry.label);
 			for (int i = 0; i < dict_entries.length; i++) {
-				print(@"$(dict_entries.index(i))");
+				print(@"$(dict_entries[i])");
 			}
-			entry_view.ChangeDictEntry (dict_entries.index(0));
+			entry_view.ChangeDictEntry (dict_entries[0]);
 		} 
 	}
 

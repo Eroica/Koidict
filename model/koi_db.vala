@@ -70,7 +70,7 @@ class KoiDB {
 		return query(titleQuery);
 	}
 
-	public Array<DictEntry> Get(string element) {
+	public DictEntry[] Get(string element) {
 		var entryQuery = @"select * from	entries as entry,
 									heteronyms  as heteronym,
 									definitions as definition
@@ -78,11 +78,13 @@ class KoiDB {
 									heteronym.entry_id = entry.id and
 									definition.heteronym_id = heteronym.id";
 		var entries = query(entryQuery);
-		var results = new Array<DictEntry>();
+		DictEntry[] results = {};
 		var allColumns = EntryColumns.Num() + HeteronymColumns.Num() + DefinitionColumns.Num();
-		for (int i = 0; i < entries.length - allColumns + 1; i += allColumns) {
-			results.append_val(new DictEntry());
-			var dictEntry = results.index(results.length - 1);
+		results.resize(entries.length / allColumns);
+		int entryIndex = 0;
+		for (int i = 0; i < entries.length - allColumns + 1; i += allColumns, entryIndex++) {
+			results[entryIndex] = new DictEntry();
+			var dictEntry = results[entryIndex];
 			var hOffset = EntryColumns.Num();
 			var dOffset = hOffset + HeteronymColumns.Num();
 
